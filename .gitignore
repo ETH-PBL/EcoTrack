@@ -1,0 +1,5 @@
+main
+testdata.txt
+.mypy_cache
+build
+.cache
