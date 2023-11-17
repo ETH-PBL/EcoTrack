@@ -4,7 +4,7 @@
 
 ***Energy-Aware Adaptive Sampling for Self-Sustainability in Resource-Constrained IoT Devices***
 
-[ENSSys 2023 *(Not yet published)*](https://doi.org/10.1145/3628353.3628545) / [arXiv:2310.20331 (preprint)](https://doi.org/10.48550/arXiv.2310.20331)
+[ENSSys 2023](https://doi.org/10.1145/3628353.3628545) / [arXiv:2310.20331 (preprint)](https://doi.org/10.48550/arXiv.2310.20331)
 
 > <div align="justify">In the ever-growing Internet of Things (IoT) landscape, smart power management algorithms combined with energy harvesting solutions are crucial to obtain self-sustainability. This paper presents an energy-aware adaptive sampling rate algorithm designed for embedded deployment in resource-constrained, battery-powered IoT devices. The algorithm, based on a finite state machine (FSM) and inspired by Transmission Control Protocol (TCP) Reno’s additive increase and multiplicative decrease, maximizes sensor sampling rates, ensuring power self-sustainability without risking battery depletion. ... . The results, validated on data from three different European cities, show that the proposed algorithm enables self-sustainability while maximizing sampled locations per day. In experiments conducted with a 3000 mAh battery capacity, the algorithm consistently maintained a minimum of 24 localizations per day and achieved peaks of up to 3000.</div>
 
