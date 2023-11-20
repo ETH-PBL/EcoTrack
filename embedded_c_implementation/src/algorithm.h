@@ -1,1 +1,1 @@
-../../c_implementation/algorithm/algorithm.h
+../../algorithm/c_implementation/algorithm.h

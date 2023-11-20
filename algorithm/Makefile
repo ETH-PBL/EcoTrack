@@ -27,7 +27,7 @@ TARGET_EXEC := test
 BUILD_DIR := ./build
 
 # All the C files we want to compile
-SRCS := ./algorithm/algorithm.c ./test.c
+SRCS := ./c_implementation/algorithm.c ./test.c
 
 # Prepends BUILD_DIR and appends .o to every src file
 # As an example, ./your_dir/hello.c turns into ./build/./your_dir/hello.c.o
@@ -38,7 +38,7 @@ OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
 DEPS := $(OBJS:.o=.d)
 
 # Every folder in ./src will need to be passed to GCC so that it can find header files
-INC_DIRS := ./algorithm
+INC_DIRS := ./c_implementation
 # Add a prefix to INC_DIRS. So moduleA would become -ImoduleA. GCC understands this -I flag
 INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 
