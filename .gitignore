@@ -1,5 +1,7 @@
 main
-testdata.txt
 .mypy_cache
 build
 .cache
+__pycache__
+testfiles/testoutput.csv
+testfiles/testgroundtruth.csv

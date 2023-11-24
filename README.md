@@ -34,21 +34,23 @@ This repository contains the source code and implementation of the adaptive samp
 
 - **algorithm-opensource**
   - **embedded_c_implementation** (Folder for Zephyr RTOS implementation for nRF52833 DK)
-  - **c_implementation** (Folder for C implementation of the algorithm plus test files)
-    - **algorithm** (Folder containing algorithm.c and .h)
+  - **algorithm** (Folder for algorithm plus test files)
+    - **c_implementation** (Folder containing the C implementation, consisting of algorithm.c and .h)
       - algorithm.c
       - algorithm.h
-    - **testfiles** (Folder containing sample testinput.csv and testoutput_groundtruth.csv)
+    - **py_implementation** (Folder containing the Python implementation, consisting of algorithm.py)
+      - algorithm.py
+    - **testfiles** (Folder containing sample testinput.csv)
       - testinput.csv
-      - testoutput_groundtruth.csv
-    - test.c (Test application as described later)
-    - Makefile (Makefile for the test, including `make test` to build the test application and `make clean` to clean it)
+    - test.c (C test application as described later)
+    - test.py (Python test application as described later)
+    - Makefile (Makefile for the test, including `make test` to build and test the test application and `make clean` to clean it)
 
 ## Algorithm Description
 
-The core algorithm is implemented in the `algorithm.c` and `algorithm.h` files. It employs a finite state machine (FSM) with states for decrease (D), zero (Z), and increase (I). The algorithm dynamically adjusts the sampling frequency (k) based on the battery level, using additive increase for the increase state and multiplicative decrease for the decrease state.
+The core algorithm is implemented in the `algorithm.c` and `algorithm.h` respectively `algorithm.py` files. It employs a finite state machine (FSM) with states for decrease (D), zero (Z), and increase (I). The algorithm dynamically adjusts the sampling frequency (k) based on the battery level, using additive increase for the increase state and multiplicative decrease for the decrease state.
 
-A minimal sample on how to use/initialize the algorithm is given here:
+A minimal sample on how to use/initialize the C implementation of the algorithm is given here:
 
 ```c
 #include "algorithm.h"
@@ -84,21 +86,22 @@ int main() {
 
 ## Test Application
 
-The `test.c` file serves as a test application for the algorithm. It reads input data from a CSV file (`testinput.csv`), updates the algorithm state for each input, and outputs the corresponding k values to an output CSV file (`testoutput_groundtruth.csv`). The test application is designed to run on Linux.
+The `test.c` file serves as a test application for the algorithm. It reads input data from a CSV file (given with the `-i` CLI argument), updates the algorithm state for each input, and outputs the corresponding k values to an output CSV file (given with the `-o` CLI argument). The test application is designed to run on Linux.
+The `test.py` file does exactly the same, but in Python.
 
 ## Usage Instructions
 
 1. **Compile the Test Application**
 
-   Run the following command in the `c_implementation` folder:
+   Run the following command in the `algorithm` folder:
 
    ```bash
-   make test
+   make all
    ```
 
 2. **Run the Test Application**
 
-   Execute the compiled test application with the following command from within the `c_implementation` folder:
+   Execute the compiled test application with the following command from within the `algorithm` folder:
 
    ```bash
    ./test -i <input_filepath> [-o <output_filepath>]
@@ -114,6 +117,10 @@ The `test.c` file serves as a test application for the algorithm. It reads input
    ```
 
    This command reads battery level data from `testinput.csv`, updates the algorithm, and outputs the results to `testoutput.csv`.
+
+4. **Check integrity between Python and C**
+
+   Running `make test` from within the `algorithm` folder will generate test outputs for both, the C and the Python implementation, and compare the two.
 
 ## Note
 

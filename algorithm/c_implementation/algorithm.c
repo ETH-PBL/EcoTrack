@@ -4,13 +4,14 @@
 #include <stdint.h>
 #include <stdio.h>
 
-#define max(a, b)                                                              \
-  ({                                                                           \
-    __typeof__(a) _a = (a);                                                    \
-    __typeof__(b) _b = (b);                                                    \
-    _a > _b ? _a : _b;                                                         \
-  })
+#define MAX(a,b) (((a)>(b))?(a):(b))
 
+/**
+ * @brief Updates the finite state machine state based on the result of the
+ * metric.
+ * @param state Pointer to the algorithm state.
+ * @param metric The result of the metric used for state transitions.
+ */
 static void update_fsm(struct algorithm_state *state, float metric) {
   switch (state->fsm_state) {
   case Z:
@@ -35,11 +36,15 @@ static void update_fsm(struct algorithm_state *state, float metric) {
   }
 }
 
+/**
+ * @brief Updates the value of k based on the finite state machine state.
+ * @param state Pointer to the algorithm state.
+ */
 static void update_k(struct algorithm_state *state) {
   switch (state->fsm_state) {
   case D:
     state->k = (state->k + (DECREASE - 1)) / DECREASE; // proper rounding
-    state->k = max(state->k, K_MIN);
+    state->k = MAX(state->k, K_MIN);
     break;
   case I:
     state->k = state->k + INCREASE;

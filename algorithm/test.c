@@ -24,21 +24,22 @@ int main(int argc, char **argv) {
     case 'o':
       outpath = optarg;
       break;
-
     case '?':
-    default:
       return 1;
+    default:
+      break;
     }
   }
 
   if (inpath == NULL) {
+    fprintf(stderr, "No input file is provided!\r\n");
     return -EINVAL;
   }
 
   // Open files
   FILE *infile = fopen(inpath, "r");
   if (infile == NULL) {
-    perror("Unable to open file!");
+    fprintf(stderr, "Unable to open file!\r\n");
     exit(1);
   }
 
@@ -46,8 +47,14 @@ int main(int argc, char **argv) {
   if (outpath != NULL) {
     outfile = fopen(outpath, "w");
     if (outfile == NULL) {
-      perror("Unable to open output file!");
+      fprintf(stderr, "Unable to open output file!\r\n");
     }
+  }
+
+  if (outfile == NULL) {
+    printf("battery_level, k\n");
+  } else {
+    fprintf(outfile, "battery_level, k\n");
   }
 
   // Initialize algorithm
@@ -64,12 +71,17 @@ int main(int argc, char **argv) {
 
   while (getline(&line, &len, infile) != -1) {
     float number = 0;
-    sscanf(line, "%f\n", &number);
+
+    // if line contains no number
+    if (sscanf(line, "%f\n", &number) == 0) {
+      continue;
+    }
+
     int k = update_algorithm(&state, number);
     if (outfile == NULL) {
-      printf("%f, %d\n", number, k);
+      printf("%.3f, %d\n", number, k);
     } else {
-      fprintf(outfile, "%f, %d\n", number, k);
+      fprintf(outfile, "%.3f, %d\n", number, k);
     }
   }
 

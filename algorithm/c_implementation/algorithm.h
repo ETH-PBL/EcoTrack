@@ -58,20 +58,6 @@ int fsm_init(struct algorithm_state *state, float battery_capacity,
              float battery_level);
 
 /**
- * @brief Updates the finite state machine state based on the result of the
- * metric.
- * @param state Pointer to the algorithm state.
- * @param metric The result of the metric used for state transitions.
- */
-static void update_fsm(struct algorithm_state *state, float metric);
-
-/**
- * @brief Updates the value of k based on the finite state machine state.
- * @param state Pointer to the algorithm state.
- */
-static void update_k(struct algorithm_state *state);
-
-/**
  * @brief Updates the algorithm state based on the new battery level.
  * @param state Pointer to the algorithm state.
  * @param new_battery_level The new battery level.
